@@ -81,6 +81,16 @@ enum class Model : uint32_t {
 
 enum class Side : uint32_t { Left, Right };
 
+inline bool IsSingleBattery(Model model)
+{
+    switch (model) {
+    case Model::AirPods_Max:
+        return true;
+    default:
+        return false;
+    }
+}
+
 } // namespace Core::AirPods
 
 template <>

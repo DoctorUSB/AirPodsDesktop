@@ -347,50 +347,81 @@ void TaskbarStatus::Repaint()
         }
         const auto &state = _airPodsState.value();
 
-        if (state.pods.left.battery.Available()) {
-            const auto batteryValue = state.pods.left.battery.Value();
+        if (Core::AirPods::IsSingleBattery(state.model)) {
+            // For single-battery devices (e.g. AirPods Max), show one battery indicator
+            if (state.pods.left.battery.Available()) {
+                const auto batteryValue = state.pods.left.battery.Value();
 
-            _ui.labelLeft->setText(QString{"%1%"}.arg(batteryValue));
-            _battery.left->setValue(batteryValue);
-            _battery.left->setCharging(state.pods.left.isCharging);
+                _ui.labelLeft->setText(QString{"%1%"}.arg(batteryValue));
+                _battery.left->setValue(batteryValue);
+                _battery.left->setCharging(state.pods.left.isCharging);
 
-            _icon.left->show();
-            if (_behavior == TaskbarStatusBehavior::Text) {
-                _ui.labelLeft->show();
+                _icon.left->hide();
+                if (_behavior == TaskbarStatusBehavior::Text) {
+                    _ui.labelLeft->show();
+                    _battery.left->hide();
+                }
+                else {
+                    _ui.labelLeft->hide();
+                    _battery.left->show();
+                }
+            }
+            else {
+                _icon.left->hide();
+                _ui.labelLeft->hide();
                 _battery.left->hide();
             }
-            else {
-                _ui.labelLeft->hide();
-                _battery.left->show();
-            }
-        }
-        else {
-            _icon.left->hide();
-            _ui.labelLeft->hide();
-            _battery.left->hide();
-        }
 
-        if (state.pods.right.battery.Available()) {
-            const auto batteryValue = state.pods.right.battery.Value();
-
-            _ui.labelRight->setText(QString{"%1%"}.arg(batteryValue));
-            _battery.right->setValue(batteryValue);
-            _battery.right->setCharging(state.pods.right.isCharging);
-
-            _icon.right->show();
-            if (_behavior == TaskbarStatusBehavior::Text) {
-                _ui.labelRight->show();
-                _battery.right->hide();
-            }
-            else {
-                _ui.labelRight->hide();
-                _battery.right->show();
-            }
-        }
-        else {
             _icon.right->hide();
             _ui.labelRight->hide();
             _battery.right->hide();
+        }
+        else {
+            if (state.pods.left.battery.Available()) {
+                const auto batteryValue = state.pods.left.battery.Value();
+
+                _ui.labelLeft->setText(QString{"%1%"}.arg(batteryValue));
+                _battery.left->setValue(batteryValue);
+                _battery.left->setCharging(state.pods.left.isCharging);
+
+                _icon.left->show();
+                if (_behavior == TaskbarStatusBehavior::Text) {
+                    _ui.labelLeft->show();
+                    _battery.left->hide();
+                }
+                else {
+                    _ui.labelLeft->hide();
+                    _battery.left->show();
+                }
+            }
+            else {
+                _icon.left->hide();
+                _ui.labelLeft->hide();
+                _battery.left->hide();
+            }
+
+            if (state.pods.right.battery.Available()) {
+                const auto batteryValue = state.pods.right.battery.Value();
+
+                _ui.labelRight->setText(QString{"%1%"}.arg(batteryValue));
+                _battery.right->setValue(batteryValue);
+                _battery.right->setCharging(state.pods.right.isCharging);
+
+                _icon.right->show();
+                if (_behavior == TaskbarStatusBehavior::Text) {
+                    _ui.labelRight->show();
+                    _battery.right->hide();
+                }
+                else {
+                    _ui.labelRight->hide();
+                    _battery.right->show();
+                }
+            }
+            else {
+                _icon.right->hide();
+                _ui.labelRight->hide();
+                _battery.right->hide();
+            }
         }
 
         _isStateReady = true;

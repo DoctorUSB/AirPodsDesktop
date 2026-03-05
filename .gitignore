@@ -16,3 +16,11 @@ CMakeSettings.json
 
 # Build
 Build/
+/build-setup.ps1
+/build-env.md
+/aqtinstall.log
+/CMakeLists.txt
+/CMakeLists.txt
+/configure.bat
+/CMakeLists.txt
+/makeExe.txt

@@ -148,6 +148,10 @@ Latest version: %2%3</source>
         <source>Quit</source>
         <translation>종료</translation>
     </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>

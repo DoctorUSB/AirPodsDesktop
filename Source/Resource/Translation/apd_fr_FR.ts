@@ -149,6 +149,10 @@ Dernière version: %2%3</translation>
         <source>Quit</source>
         <translation>Quitter</translation>
     </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>

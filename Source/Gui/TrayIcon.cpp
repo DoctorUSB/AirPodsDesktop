@@ -120,36 +120,51 @@ void TrayIcon::Repaint()
                    textPlaceHolder = QString{"\n%1: %2%%3"};
 
         // clang-format off
-        if (state.pods.left.battery.Available()) {
-            const auto batteryValue = state.pods.left.battery.Value();
+        if (Core::AirPods::IsSingleBattery(state.model)) {
+            // For single-battery devices (e.g. AirPods Max), show one battery entry
+            if (state.pods.left.battery.Available()) {
+                const auto batteryValue = state.pods.left.battery.Value();
 
-            toolTipContent += textPlaceHolder
-                .arg(strLeft)
-                .arg(batteryValue)
-                .arg(state.pods.left.isCharging ? textCharging : QString{});
+                toolTipContent += textPlaceHolder
+                    .arg(tr("Battery"))
+                    .arg(batteryValue)
+                    .arg(state.pods.left.isCharging ? textCharging : QString{});
 
-            minBattery = batteryValue;
-        }
-
-        if (state.pods.right.battery.Available()) {
-            const auto batteryValue = state.pods.right.battery.Value();
-
-            toolTipContent += textPlaceHolder
-                .arg(strRight)
-                .arg(batteryValue)
-                .arg(state.pods.right.isCharging ? textCharging : QString{});
-
-            if (minBattery.Available() && batteryValue < minBattery.Value() ||
-                !minBattery.Available()) {
                 minBattery = batteryValue;
             }
         }
+        else {
+            if (state.pods.left.battery.Available()) {
+                const auto batteryValue = state.pods.left.battery.Value();
 
-        if (state.caseBox.battery.Available()) {
-            toolTipContent += textPlaceHolder
-                .arg(strCase)
-                .arg(state.caseBox.battery.Value())
-                .arg(state.caseBox.isCharging ? textCharging : QString{});
+                toolTipContent += textPlaceHolder
+                    .arg(strLeft)
+                    .arg(batteryValue)
+                    .arg(state.pods.left.isCharging ? textCharging : QString{});
+
+                minBattery = batteryValue;
+            }
+
+            if (state.pods.right.battery.Available()) {
+                const auto batteryValue = state.pods.right.battery.Value();
+
+                toolTipContent += textPlaceHolder
+                    .arg(strRight)
+                    .arg(batteryValue)
+                    .arg(state.pods.right.isCharging ? textCharging : QString{});
+
+                if (minBattery.Available() && batteryValue < minBattery.Value() ||
+                    !minBattery.Available()) {
+                    minBattery = batteryValue;
+                }
+            }
+
+            if (state.caseBox.battery.Available()) {
+                toolTipContent += textPlaceHolder
+                    .arg(strCase)
+                    .arg(state.caseBox.battery.Value())
+                    .arg(state.caseBox.isCharging ? textCharging : QString{});
+            }
         }
         // clang-format on
         break;

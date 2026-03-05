@@ -91,12 +91,23 @@ Core::AirPods::Model AirPods::GetModel() const
 
 Core::AirPods::Battery AirPods::GetLeftBattery() const
 {
+    // AirPods Max has a single battery (the headset itself), always in battery.curr.
+    // battery.anot is 0 (no second pod) but is in the valid 0-10 range, so we must
+    // ignore it to prevent false 0% readings.
+    if (GetModel() == Core::AirPods::Model::AirPods_Max) {
+        const auto val = battery.curr;
+        return (val >= 0 && val <= 10) ? val : Core::AirPods::Battery{};
+    }
     const auto val = (IsLeftBroadcasted() ? battery.curr : battery.anot);
     return (val >= 0 && val <= 10) ? val : Core::AirPods::Battery{};
 }
 
 Core::AirPods::Battery AirPods::GetRightBattery() const
 {
+    // AirPods Max has no separate right pod.
+    if (GetModel() == Core::AirPods::Model::AirPods_Max) {
+        return Core::AirPods::Battery{};
+    }
     const auto val = (IsRightBroadcasted() ? battery.curr : battery.anot);
     return (val >= 0 && val <= 10) ? val : Core::AirPods::Battery{};
 }
@@ -109,11 +120,18 @@ Core::AirPods::Battery AirPods::GetCaseBattery() const
 
 bool AirPods::IsLeftCharging() const
 {
+    // AirPods Max: battery.curr is always the headset battery, so always use currCharging.
+    if (GetModel() == Core::AirPods::Model::AirPods_Max) {
+        return battery.currCharging != 0;
+    }
     return (IsLeftBroadcasted() ? battery.currCharging : battery.anotCharging) != 0;
 }
 
 bool AirPods::IsRightCharging() const
 {
+    if (GetModel() == Core::AirPods::Model::AirPods_Max) {
+        return false;
+    }
     return (IsRightBroadcasted() ? battery.currCharging : battery.anotCharging) != 0;
 }
 

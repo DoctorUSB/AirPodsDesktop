@@ -202,6 +202,18 @@ bool StateManager::IsPossibleDesiredAdv(const Advertisement &adv) const
 
     const auto &advState = adv.GetAdvState();
 
+    // Once a model is established, reject any advertisement that reports a different model.
+    // This prevents a nearby device (e.g. another user's AirPods) from corrupting the state
+    // when one side's advertisement slot has been vacated by the reset timer.
+    if (_cachedState.has_value() && _cachedState->model != Model::Unknown &&
+        advState.model != _cachedState->model) {
+        LOG(Warn,
+            "IsPossibleDesiredAdv returns false. Reason: model mismatch with established state. "
+            "new='{}' established='{}'",
+            Helper::ToString(advState.model), Helper::ToString(_cachedState->model));
+        return false;
+    }
+
     auto &lastAdv = advState.side == Side::Left ? _adv.left : _adv.right;
     auto &lastAnotherAdv = advState.side == Side::Left ? _adv.right : _adv.left;
 

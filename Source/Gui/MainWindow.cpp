@@ -552,6 +552,8 @@ void MainWindow::Repaint()
         _leftBattery->hide();
         _rightBattery->hide();
         _caseBattery->hide();
+        _ui.horizontalLayoutWidget_3->setGeometry(30, 210, 121, 51);
+        _ui.horizontalLayoutWidget_2->hide();
     };
 
     QString title;
@@ -589,31 +591,51 @@ void MainWindow::Repaint()
 
     SetAnimation(state.model);
 
-    if (!state.pods.left.battery.Available()) {
-        _leftBattery->hide();
-    }
-    else {
-        _leftBattery->setCharging(state.pods.left.isCharging);
-        _leftBattery->setValue(state.pods.left.battery.Value());
-        _leftBattery->show();
-    }
-
-    if (!state.pods.right.battery.Available()) {
+    if (Core::AirPods::IsSingleBattery(state.model)) {
+        // For single-battery devices (e.g. AirPods Max), show only one battery indicator.
+        // Expand the pod container to the full dialog width so the layout spacers centre it.
+        _ui.horizontalLayoutWidget_3->setGeometry(0, 210, 300, 51);
+        _ui.horizontalLayoutWidget_2->hide();
+        if (state.pods.left.battery.Available()) {
+            _leftBattery->setCharging(state.pods.left.isCharging);
+            _leftBattery->setValue(state.pods.left.battery.Value());
+            _leftBattery->show();
+        }
+        else {
+            _leftBattery->hide();
+        }
         _rightBattery->hide();
-    }
-    else {
-        _rightBattery->setCharging(state.pods.right.isCharging);
-        _rightBattery->setValue(state.pods.right.battery.Value());
-        _rightBattery->show();
-    }
-
-    if (!state.caseBox.battery.Available()) {
         _caseBattery->hide();
     }
     else {
-        _caseBattery->setCharging(state.caseBox.isCharging);
-        _caseBattery->setValue(state.caseBox.battery.Value());
-        _caseBattery->show();
+        _ui.horizontalLayoutWidget_3->setGeometry(30, 210, 121, 51);
+        _ui.horizontalLayoutWidget_2->show();
+        if (!state.pods.left.battery.Available()) {
+            _leftBattery->hide();
+        }
+        else {
+            _leftBattery->setCharging(state.pods.left.isCharging);
+            _leftBattery->setValue(state.pods.left.battery.Value());
+            _leftBattery->show();
+        }
+
+        if (!state.pods.right.battery.Available()) {
+            _rightBattery->hide();
+        }
+        else {
+            _rightBattery->setCharging(state.pods.right.isCharging);
+            _rightBattery->setValue(state.pods.right.battery.Value());
+            _rightBattery->show();
+        }
+
+        if (!state.caseBox.battery.Available()) {
+            _caseBattery->hide();
+        }
+        else {
+            _caseBattery->setCharging(state.caseBox.isCharging);
+            _caseBattery->setValue(state.caseBox.battery.Value());
+            _caseBattery->show();
+        }
     }
 }
 
