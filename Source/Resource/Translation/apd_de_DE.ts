@@ -108,11 +108,11 @@ Neueste Version: %2%3</translation>
     </message>
     <message>
         <source>Translation Contributors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Übersetzungsmitwirkende:</translation>
     </message>
     <message>
         <source>Third-Party Libraries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Drittanbieter-Bibliotheken:</translation>
     </message>
 </context>
 <context>
@@ -151,7 +151,7 @@ Neueste Version: %2%3</translation>
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie</translation>
     </message>
 </context>
 <context>
@@ -292,15 +292,15 @@ Bitte verbinde deine AirPods zuerst in den Windows Bluetooth-Einstellungen.</tra
     </message>
     <message>
         <source>Display battery on taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie in der Taskleiste anzeigen</translation>
     </message>
     <message>
         <source>As text</source>
-        <translation type="unfinished"></translation>
+        <translation>Als Text</translation>
     </message>
     <message>
         <source>As icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Als Symbol</translation>
     </message>
 </context>
 </TS>

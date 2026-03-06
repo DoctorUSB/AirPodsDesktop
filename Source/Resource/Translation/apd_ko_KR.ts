@@ -103,15 +103,15 @@ Latest version: %2%3</source>
     <message>
         <source>|</source>
         <extracomment>To credit translators, you can leave your name here if you wish. (Sorted by time added, separated by &quot;|&quot; character, only single &quot;|&quot; for empty)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>|</translation>
     </message>
     <message>
         <source>Translation Contributors:</source>
-        <translation type="unfinished"></translation>
+        <translation>번역 기여자:</translation>
     </message>
     <message>
         <source>Third-Party Libraries:</source>
-        <translation type="unfinished"></translation>
+        <translation>서드파티 라이브러리:</translation>
     </message>
 </context>
 <context>
@@ -150,7 +150,7 @@ Latest version: %2%3</source>
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>배터리</translation>
     </message>
 </context>
 <context>
@@ -291,15 +291,15 @@ You need to pair your AirPods in Windows Bluetooth Settings first.</source>
     </message>
     <message>
         <source>Display battery on taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>작업 표시줄에 배터리 표시</translation>
     </message>
     <message>
         <source>As text</source>
-        <translation type="unfinished"></translation>
+        <translation>텍스트로</translation>
     </message>
     <message>
         <source>As icon</source>
-        <translation type="unfinished"></translation>
+        <translation>아이콘으로</translation>
     </message>
 </context>
 </TS>

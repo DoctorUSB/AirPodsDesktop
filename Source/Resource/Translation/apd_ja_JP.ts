@@ -108,11 +108,11 @@ Latest version: %2%3</source>
     </message>
     <message>
         <source>Translation Contributors:</source>
-        <translation type="unfinished"></translation>
+        <translation>翻訳貢献者：</translation>
     </message>
     <message>
         <source>Third-Party Libraries:</source>
-        <translation type="unfinished"></translation>
+        <translation>サードパーティライブラリ：</translation>
     </message>
 </context>
 <context>
@@ -151,7 +151,7 @@ Latest version: %2%3</source>
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>バッテリー</translation>
     </message>
 </context>
 <context>
@@ -292,15 +292,15 @@ You need to pair your AirPods in Windows Bluetooth Settings first.</source>
     </message>
     <message>
         <source>Display battery on taskbar</source>
-        <translation type="unfinished">タスクバーに電池残量を表示</translation>
+        <translation>タスクバーに電池残量を表示</translation>
     </message>
     <message>
         <source>As text</source>
-        <translation type="unfinished">文字で表示</translation>
+        <translation>文字で表示</translation>
     </message>
     <message>
         <source>As icon</source>
-        <translation type="unfinished">アイコンで表示</translation>
+        <translation>アイコンで表示</translation>
     </message>
 </context>
 </TS>

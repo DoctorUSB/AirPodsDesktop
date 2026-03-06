@@ -151,7 +151,7 @@ Latest version: %2%3</source>
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Батарея</translation>
     </message>
 </context>
 <context>
